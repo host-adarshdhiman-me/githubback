@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinetra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffe6e6, #e6f2ff);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .modal-body {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .floating-home-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Safety Equipment Store</h1>
+        <div class="row">
+            <!-- Product Cards -->
+            <div class="col-md-6" id="product-container">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="buyNowModal" tabindex="-1" aria-labelledby="buyNowModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyNowModalLabel">Buy Now</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Function under development
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Home Button -->
+    <a href="home.html" class="floating-home-button">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <script>
+        // List of products with real images
+        const products = [
+            { name: "Pepper Spray", price: "₹299", image: "https://m.media-amazon.com/images/I/61kqjJ9kCoL.jpg" },
+            { name: "Safety Rod", price: "₹499", image: "https://5.imimg.com/data5/SELLER/Default/2023/9/343644434/VQ/MS/NH/88450750/self-defence-stick.jpg" },
+            { name: "Torch", price: "₹699", image: "https://renmax.in/wp-content/uploads/2024/01/1-3-1.jpg.webp" },
+            { name: "Fire Starter", price: "₹199", image: "https://m.media-amazon.com/images/I/71aJZ0mhArL.jpg" },
+            { name: "Pocket Knife", price: "₹399", image: "https://m.media-amazon.com/images/I/7100ZawHrCL._AC_UF1000,1000_QL80_.jpg" },
+            { name: "Safety Whistle", price: "₹99", image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/whistle/g/k/s/emergency-whistles-safety-whistle-with-keychain-sports-whistles-original-imahfygvsctbqy3e.jpeg?q=90&crop=false" },
+            { name: "Self-Defense Keychain", price: "₹199", image: "https://www.thehomesecuritysuperstore.com/cdn/shop/collections/KeychainWeapons_500x500_6df64853-b12b-4fdc-b903-b900775a7ecb.jpg?crop=center&height=1200&v=1688764371&width=1200" },
+            { name: "Safety Alarm", price: "₹299", image: "https://5.imimg.com/data5/SELLER/Default/2024/2/389910290/WE/TG/TW/68103635/rechargeable-alarm-keychain-130-db-emergency-siren-led-light-safety-alert-for-women-kids-elderly-500x500.jpg" },
+            { name: "Gloves", price: "₹249", image: "https://m.media-amazon.com/images/I/71FO9XDasrL._AC_UF1000,1000_QL80_.jpg" },
+            { name: "Helmet", price: "₹999", image: "https://m.media-amazon.com/images/I/512SaINZVOL._AC_UF1000,1000_QL80_.jpghttps://m.media-amazon.com/images/I/512SaINZVOL._AC_UF1000,1000_QL80_.jpg" },
+            { name: "Survival Kit", price: "₹1999", image: "https://dashvendor.com/cdn/shop/files/7703318_large_6803f59e-a9da-423d-a6a5-8a0e67a94358.png?v=1705191518" },
+            { name: "Emergency Blanket", price: "₹149", image: "https://images-cdn.ubuy.co.in/633b1ffc0863fb15761b85c5-olive-drab-green-warm-wool-fire.jpg" },
+            { name: "Flashlight", price: "₹349", image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/torch/s/v/p/25-1-long-range-zoomable-cob-mini-rechargeable-pocket-flashlight-original-imah4ee3nhmntntw.jpeg?q=90&crop=false" },
+            { name: "Multi-Tool", price: "₹899", image: "https://m.media-amazon.com/images/I/71usMdVzeDL.jpg" },
+            { name: "Safety Belt", price: "₹499", image: "https://images-cdn.ubuy.co.in/633afec35bcecf46ad1e1991-ubuy-online-shopping.jpg" },
+            { name: "Fire Extinguisher", price: "₹2499", image: "https://www.variexonline.com/image/cache/catalog/Products/Fire%20Extinguishers/car%20fire%20extinguisher/mini-car-fire-extinguisher-500x500-600x600.jpg" },
+            { name: "Rescue Cutter", price: "₹599", image: "https://www.novus-dahle.com/en/wp-content/uploads/2023/12/Dahle_Cutter_10892__20200825143505_339409.jpg" },
+            { name: "Body Camera", price: "₹3999", image: "https://image.made-in-china.com/2f0j00PfrkRVZDvQgn/1080P-Wide-Angle-140-Degree-Rugged-Body-Worn-Camera.webp" },
+            { name: "First Aid Kit", price: "₹499", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9AJ9Uh6aEvZpIIEihsCQgZW4RTdqD-87fpA&s" },
+            { name: "Tactical Pen", price: "₹249", image: "https://m.media-amazon.com/images/I/71zwR6mpx0L.jpg" },
+        ];
+
+        // Lazy load products dynamically
+        const productContainer = document.getElementById("product-container");
+        products.forEach(product => {
+            const card = document.createElement("div");
+            card.className = "card shadow-sm";
+
+            card.innerHTML = `
+                <img src="${product.image}" class="card-img-top" alt="${product.name}" loading="lazy">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">Price: ${product.price}</p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#buyNowModal">Buy Now</button>
+                </div>
+            `;
+
+            productContainer.appendChild(card);
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

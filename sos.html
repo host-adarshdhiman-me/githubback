@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="15; url=maps.html"> 
+    <title>Trinetra</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #F8D7DA;
+            color: #333;
+        }
+
+        .red-light {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .red-light img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps li {
+            margin: 15px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid gray;
+            margin-right: 10px;
+            display: inline-block;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .circle.done {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .final-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #444;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="red-light">
+        <img src="assets/red-alam.gif" alt="Red Alarm">
+    </div>
+    <h2>SOS in Progress...</h2>
+    <ul class="steps">
+        <li><div class="circle" id="step1"></div> Getting your current location...</li>
+        <li><div class="circle" id="step2"></div> Connecting to your contacts...</li>
+        <li><div class="circle" id="step3"></div> Connecting to government authorities...</li>
+        <li><div class="circle" id="step4"></div> Alerting contacts and government authorities...</li>
+        <li><div class="circle" id="step5"></div> Would you like to inform civil helpers?</li>
+    </ul>
+    <p class="final-message" id="finalMessage">All actions completed successfully!</p>
+
+    <script>
+        function simulateSteps() {
+            const steps = [1, 2, 3, 4, 5]; // Step IDs
+            let currentStep = 0;
+
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    const circle = document.getElementById(`step${steps[currentStep]}`);
+                    circle.classList.add("done");
+
+                    // Add special action for step 5 (inform civil helpers)
+                    if (currentStep === 4) {
+                        setTimeout(() => {
+                            console.log("Civil helpers have been informed!");
+                        }, 1000); // Simulate small delay for this step
+                    }
+
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    showFinalMessage();
+                }
+            }, 2000); // Delay between steps (2 seconds)
+        }
+
+        function showFinalMessage() {
+            const finalMessage = document.getElementById("finalMessage");
+            finalMessage.style.display = "block";
+        }
+
+        // Start the step simulation on page load
+        window.onload = simulateSteps;
+    </script>
+</body>
+</html>

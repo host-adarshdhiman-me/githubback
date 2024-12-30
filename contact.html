@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinetra</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #F8D7DA;
+            color: #333;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #721C24;
+        }
+
+        .contact-list {
+            width: 90%;
+            max-width: 500px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #F5C6CB;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .contact-number {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .call-button {
+            padding: 8px 12px;
+            background-color: #FF5C5C;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .call-button:hover {
+            background-color: #E14B4B;
+        }
+
+        .home-button {
+            padding: 12px 20px;
+            background-color: #721C24;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #5A101B;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Emergency Contacts</h2>
+    <div class="contact-list">
+        <div class="contact-item">
+            <div class="contact-info">
+                <span class="contact-name">John Doe</span>
+                <span class="contact-number">+1 555-1234</span>
+            </div>
+            <button class="call-button">Call</button>
+        </div>
+        <div class="contact-item">
+            <div class="contact-info">
+                <span class="contact-name">Jane Smith</span>
+                <span class="contact-number">+1 555-5678</span>
+            </div>
+            <button class="call-button">Call</button>
+        </div>
+        <div class="contact-item">
+            <div class="contact-info">
+                <span class="contact-name">Alice Johnson</span>
+                <span class="contact-number">+1 555-9012</span>
+            </div>
+            <button class="call-button">Call</button>
+        </div>
+        <div class="contact-item">
+            <div class="contact-info">
+                <span class="contact-name">Bob Brown</span>
+                <span class="contact-number">+1 555-3456</span>
+            </div>
+            <button class="call-button">Call</button>
+        </div>
+        <div class="contact-item">
+            <div class="contact-info">
+                <span class="contact-name">Emma Wilson</span>
+                <span class="contact-number">+1 555-7890</span>
+            </div>
+            <button class="call-button">Call</button>
+        </div>
+    </div>
+    <button class="home-button" onclick="returnToHome()">Return to Home</button>
+
+    <script>
+        function returnToHome() {
+            window.location.href = "home.html"; // Redirect to the home page (update 'index.html' to your home page file name)
+        }
+    </script>
+</body>
+</html>

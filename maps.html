@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinetra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffd9b3, #f58fef);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #map {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .status-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .status-item {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            width: 45%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .btn-return-home {
+            background-color: #007bff;
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Embedded Google Map iframe -->
+    <div id="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3182.0341603189527!2d77.28439237494082!3d28.199345103621283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cd1341cac803f%3A0x39568b648f261f55!2sShri%20Vishwakarma%20Skill%20University!5e1!3m2!1sen!2sin!4v1735539484271!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Phone Signal and Battery Status -->
+    <div class="status-container">
+        <div class="status-item">
+            <h5>Battery Status</h5>
+            <p id="battery-status">Loading...</p>
+        </div>
+        <div class="status-item">
+            <h5>Signal Strength</h5>
+            <p id="signal-status">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Return to Home Button -->
+    <a href="home.html" class="btn-return-home">Return to Home</a>
+
+    <script>
+        // Battery Status API
+        if (navigator.getBattery) {
+            navigator.getBattery().then(function(battery) {
+                updateBatteryStatus(battery);
+                battery.addEventListener('levelchange', () => updateBatteryStatus(battery));
+                battery.addEventListener('chargingchange', () => updateBatteryStatus(battery));
+            });
+        } else {
+            document.getElementById('battery-status').innerText = "Battery API not supported.";
+        }
+
+        function updateBatteryStatus(battery) {
+            const chargingStatus = battery.charging ? "Charging" : "Not Charging";
+            const batteryLevel = Math.round(battery.level * 100) + "%";
+            document.getElementById('battery-status').innerText = `${batteryLevel}, ${chargingStatus}`;
+        }
+
+        // Network Information API
+        if (navigator.connection) {
+            const connection = navigator.connection;
+            updateSignalStatus(connection);
+
+            connection.addEventListener('change', () => updateSignalStatus(connection));
+        } else {
+            document.getElementById('signal-status').innerText = "Network API not supported.";
+        }
+
+        function updateSignalStatus(connection) {
+            const connectionType = connection.effectiveType || "Unknown";
+            const downlink = connection.downlink || "N/A";
+            document.getElementById('signal-status').innerText = `Type: ${connectionType}, Downlink: ${downlink} Mbps`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinetra</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, #FFDAB9, #FF69B4); /* Gradient Background */
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .logo img {
+            width: 80%; /* Adjust logo size */
+        }
+        .app-name {
+            font-size: 36px;
+            margin-top: 20px;
+            color: #3498db; /* Blue color for title */
+            font-weight: bold;
+            text-shadow: 2px 2px 0px #fff, /* White stroke effect */
+                         -2px -2px 0px #fff,
+                         -2px 2px 0px #fff,
+                         2px -2px 0px #fff;
+        }
+        .sub-name {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #333; /* Sub Name Color */
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: #e74c3c; /* SOS-style red buttons */
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .button:hover {
+            background: #c0392b; /* Slightly darker red on hover */
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Circular Logo -->
+        <div class="logo">
+            <img src="assets/logo.png" alt="Trinetra Logo"> <!-- Add your logo image -->
+        </div>
+        <!-- App Name -->
+        <div class="app-name">Trinetra</div>
+        <!-- Sub Name -->
+        <div class="sub-name">Third Eye for Surveillance</div>
+        <!-- Buttons -->
+        <div class="buttons">
+            <button class="button" onclick="window.location.href='home.html'">Login</button>
+            <button class="button" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Registration Coming Soon</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    This feature is currently under development. Please check back later!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
