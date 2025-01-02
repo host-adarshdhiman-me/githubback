@@ -66,6 +66,8 @@
         <h3>Share Feedback</h3>
         <label for="ratingInput" class="form-label">Enter ⭐ (1-5):</label>
         <input type="number" id="ratingInput" class="form-control mb-3" placeholder="Enter ⭐ from 1 to 5" min="1" max="5">
+        <label for="locationInput" class="form-label">Enter Location:</label>
+        <input type="text" id="locationInput" class="form-control mb-3" placeholder="Enter your location">
         <textarea id="feedbackText" class="form-control mb-3" rows="3" placeholder="Share details of your own experience at this place"></textarea>
         <button id="addFeedback" class="btn btn-primary w-100">Post</button>
     </div>
@@ -95,6 +97,7 @@
                 card.innerHTML = `
                     <div class="card-body">
                         <h5 class="card-title">Rating: ${'⭐'.repeat(feedback.rating)}</h5>
+                        <p class="card-text"><strong>Location:</strong> ${feedback.location}</p>
                         <p class="card-text">${feedback.text}</p>
                     </div>
                 `;
@@ -105,12 +108,19 @@
         // Add feedback
         document.getElementById('addFeedback').addEventListener('click', () => {
             const ratingInput = document.getElementById('ratingInput');
+            const locationInput = document.getElementById('locationInput');
             const feedbackText = document.getElementById('feedbackText');
             const rating = parseInt(ratingInput.value, 10);
+            const location = locationInput.value.trim();
             const text = feedbackText.value.trim();
 
             if (!rating || rating < 1 || rating > 5) {
                 alert('Please enter a valid rating between 1 and 5!');
+                return;
+            }
+
+            if (!location) {
+                alert('Please provide a location!');
                 return;
             }
 
@@ -119,13 +129,14 @@
                 return;
             }
 
-            const newFeedback = { rating, text };
+            const newFeedback = { rating, location, text };
             storedFeedback.push(newFeedback);
             localStorage.setItem('feedback', JSON.stringify(storedFeedback));
             displayFeedback();
 
             // Reset form
             ratingInput.value = '';
+            locationInput.value = '';
             feedbackText.value = '';
         });
 
